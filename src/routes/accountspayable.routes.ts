@@ -9,4 +9,5 @@ accountsPayableRoutes.get("/:id", findAccountsPayableController)
 accountsPayableRoutes.patch("/:id", updateAccountsPayableController)
 accountsPayableRoutes.delete("/:id", deleteAccountsPayableController)
 
+
 export {accountsPayableRoutes}
