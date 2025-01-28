@@ -1,5 +1,9 @@
-
-import { createCustomerController, deleteCustomerController, findCustomerController, listCustomerController, updateCustomerController } from "controllers/costumer.controllers"
+import { createCustomerController, 
+    deleteCustomerController, 
+    findCustomerController, 
+    listCustomerController, 
+    updateCustomerController 
+} from "../controllers/costumer.controllers"
 import { Router } from "express"
 
 const costumerRoutes = Router()

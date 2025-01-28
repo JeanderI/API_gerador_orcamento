@@ -1,4 +1,4 @@
-import { Flavor } from "entities";
+import { Flavor } from "../../entities";
 import { AppDataSource } from "../../data-source";
 
 const listFlavorService = async () => {

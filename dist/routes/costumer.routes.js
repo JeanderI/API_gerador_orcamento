@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.costumerRoutes = void 0;
+const costumer_controllers_1 = require("controllers/costumer.controllers");
+const express_1 = require("express");
+const costumerRoutes = (0, express_1.Router)();
+exports.costumerRoutes = costumerRoutes;
+costumerRoutes.post("", costumer_controllers_1.createCustomerController);
+costumerRoutes.get("", costumer_controllers_1.listCustomerController);
+costumerRoutes.get("/:id", costumer_controllers_1.findCustomerController);
+costumerRoutes.patch("/:id", costumer_controllers_1.updateCustomerController);
+costumerRoutes.delete("/:id", costumer_controllers_1.deleteCustomerController);

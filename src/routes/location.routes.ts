@@ -1,4 +1,10 @@
-import { createLocationController, deleteLocationController, findLocationController, listLocationController, updateLocationController } from "controllers/locations.controllers"
+import { createLocationController, 
+    deleteLocationController, 
+    findLocationController, 
+    listLocationController, 
+    updateLocationController 
+} from "../controllers/locations.controllers"
+
 import { Router } from "express"
 
 const locationRoutes = Router()

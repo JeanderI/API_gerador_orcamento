@@ -1,9 +1,9 @@
 import { AppDataSource } from "data-source";
-import { AccountsReceivable } from "entities";
+import { AccountReceivable } from "../../entities";
 import AppError from "errors/AppErrors";
 
 const findAccountsReceivableService = async (accountsReceivableId: string) => {
-	const accountsReceivableRepository = AppDataSource.getRepository(AccountsReceivable);
+	const accountsReceivableRepository = AppDataSource.getRepository(AccountReceivable);
 
 	const accountsReceivable = await accountsReceivableRepository.findOne({
 		where: { id: accountsReceivableId },

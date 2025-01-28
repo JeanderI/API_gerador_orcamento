@@ -1,4 +1,10 @@
-import { createEventController, deleteEventController, findEventController, listEventController, updateEventController } from "controllers/events.controllers"
+import { createEventController, 
+    deleteEventController, 
+    findEventController, 
+    listEventController, 
+    updateEventController 
+} from "../controllers/events.controllers"
+
 import { Router } from "express"
 
 const eventRoutes = Router()

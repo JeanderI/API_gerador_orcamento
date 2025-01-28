@@ -1,5 +1,5 @@
 import { AppDataSource } from "data-source";
-import { Estimate } from "entities";
+import { Estimate } from "../../entities";
 import AppError from "errors/AppErrors";
 import { Repository } from "typeorm";
 

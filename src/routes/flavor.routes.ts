@@ -1,4 +1,10 @@
-import { createFlavorController, deleteFlavorController, findFlavorController, listFlavorController, updateFlavorController } from "controllers/flavor.controllers"
+import { createFlavorController, 
+    deleteFlavorController, 
+    findFlavorController, 
+    listFlavorController, 
+    updateFlavorController 
+} from "../controllers/flavor.controllers"
+
 import { Router } from "express"
 
 const flavorRoutes = Router()

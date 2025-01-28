@@ -1,12 +1,12 @@
-import { Customer } from "entities";
+import { Costumer } from "../../entities";
 import { AppDataSource } from "../../data-source";
 
-const listCustomerService = async () => {
-	const customerRepository = AppDataSource.getRepository(Customer);
+const listCostumerService = async () => {
+	const costumerRepository = AppDataSource.getRepository(Costumer);
 
-	const customers = await customerRepository.find();
+	const costumers = await costumerRepository.find();
 
-	return customers;
+	return costumers;
 };
 
-export { listCustomerService };
+export { listCostumerService };

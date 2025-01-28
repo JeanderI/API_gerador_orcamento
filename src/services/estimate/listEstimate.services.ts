@@ -1,4 +1,4 @@
-import { Estimate } from "entities";
+import { Estimate } from "../../entities";
 import { AppDataSource } from "../../data-source";
 
 const listEstimateService = async () => {

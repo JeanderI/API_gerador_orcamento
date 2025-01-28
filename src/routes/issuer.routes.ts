@@ -1,4 +1,10 @@
-import { createIssuerController, deleteIssuerController, findIssuerController, listIssuerController, updateIssuerController } from "controllers/issuer.controllers"
+import { createIssuerController, 
+    deleteIssuerController, 
+    findIssuerController, 
+    listIssuerController, 
+    updateIssuerController 
+} from "../controllers/issuer.controllers"
+
 import { Router } from "express"
 
 const issuerRoutes = Router()

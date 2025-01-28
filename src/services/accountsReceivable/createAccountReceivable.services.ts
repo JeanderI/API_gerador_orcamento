@@ -1,9 +1,9 @@
 import { AppDataSource } from "data-source";
-import { AccountsReceivable } from "entities";
+import { AccountReceivable } from "../../entities";
 import { Repository } from "typeorm";
 
 const createAccountsReceivableService = async (data: any) => {
-	const accountsReceivableRepository: Repository<AccountsReceivable> = AppDataSource.getRepository(AccountsReceivable);
+	const accountsReceivableRepository: Repository<AccountReceivable> = AppDataSource.getRepository(AccountReceivable);
 
 	const newAccountsReceivable = accountsReceivableRepository.create({
 		...data,

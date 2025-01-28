@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.estimateRoutes = void 0;
+const estimate_controllers_1 = require("controllers/estimate.controllers");
+const express_1 = require("express");
+const estimateRoutes = (0, express_1.Router)();
+exports.estimateRoutes = estimateRoutes;
+estimateRoutes.post("", estimate_controllers_1.createEstimateController);
+estimateRoutes.get("", estimate_controllers_1.listEstimateController);
+estimateRoutes.get("/:id", estimate_controllers_1.findEstimateController);
+estimateRoutes.patch("/:id", estimate_controllers_1.updateEstimateController);
+estimateRoutes.delete("/:id", estimate_controllers_1.deleteEstimateController);

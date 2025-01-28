@@ -1,5 +1,5 @@
 import { AppDataSource } from "data-source";
-import { Issuer } from "entities";
+import { Issuer } from "../../entities";
 import { Repository } from "typeorm";
 
 const createIssuerService = async (data: any) => {

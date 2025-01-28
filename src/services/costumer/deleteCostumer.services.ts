@@ -1,22 +1,22 @@
 import { AppDataSource } from "data-source";
-import { Customer } from "entities";
+import { Costumer } from "../../entities";
 import AppError from "errors/AppErrors";
 import { Repository } from "typeorm";
 
-const deleteCustomerService = async (customerId: string) => {
-	const customerRepository: Repository<Customer> = AppDataSource.getRepository(Customer);
+const deleteCostumerService = async (costumerId: string) => {
+	const costumerRepository: Repository<Costumer> = AppDataSource.getRepository(Costumer);
 
-	const customer: Customer | null = await customerRepository.findOne({
-		where: { id: customerId },
+	const costumer: Costumer | null = await costumerRepository.findOne({
+		where: { id: costumerId },
 	});
 
-	if (!customer) {
-		throw new AppError("Customer not found", 404);
+	if (!costumer) {
+		throw new AppError("Costumer not found", 404);
 	}
 
-	await customerRepository.remove(customer);
+	await costumerRepository.remove(costumer);
 
 	return;
 };
 
-export { deleteCustomerService };
+export { deleteCostumerService };

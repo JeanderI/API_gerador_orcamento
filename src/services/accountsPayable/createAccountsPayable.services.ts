@@ -1,9 +1,9 @@
 import { AppDataSource } from "data-source";
-import { AccountsPayable } from "entities";
+import { AccountPayable } from "../../entities";
 import { Repository } from "typeorm";
 
 const createAccountsPayableService = async (data: any) => {
-	const accountsPayableRepository: Repository<AccountsPayable> = AppDataSource.getRepository(AccountsPayable);
+	const accountsPayableRepository: Repository<AccountPayable> = AppDataSource.getRepository(AccountPayable);
 
 	const newAccountsPayable = accountsPayableRepository.create({
 		...data,

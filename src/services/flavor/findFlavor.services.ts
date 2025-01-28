@@ -1,5 +1,5 @@
 import { AppDataSource } from "data-source";
-import { Flavor } from "entities";
+import { Flavor } from "../../entities";
 import AppError from "errors/AppErrors";
 
 const findFlavorService = async (flavorId: string) => {

@@ -1,9 +1,9 @@
 import { AppDataSource } from "data-source";
-import { AccountsPayable } from "entities";
-import AppError from "errors/AppErrors";
+import { AccountPayable } from "../../entities";
+import AppError from "../../errors/AppErrors";
 
 const findAccountsPayableService = async (accountsPayableId: string) => {
-	const accountsPayableRepository = AppDataSource.getRepository(AccountsPayable);
+	const accountsPayableRepository = AppDataSource.getRepository(AccountPayable);
 
 	const accountsPayable = await accountsPayableRepository.findOne({
 		where: { id: accountsPayableId },

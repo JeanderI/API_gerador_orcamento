@@ -1,12 +1,12 @@
 import { AppDataSource } from "data-source";
-import { AccountsPayable } from "entities";
-import AppError from "errors/AppErrors";
+import { AccountPayable } from "../../entities";
+import AppError from "../../errors/AppErrors";
 import { Repository } from "typeorm";
 
 const updateAccountsPayableService = async (data: any, accountsPayableId: string) => {
-	const accountsPayableRepository: Repository<AccountsPayable> = AppDataSource.getRepository(AccountsPayable);
+	const accountsPayableRepository: Repository<AccountPayable> = AppDataSource.getRepository(AccountPayable);
 
-	const oldAccountsPayable: AccountsPayable | null = await accountsPayableRepository.findOne({
+	const oldAccountsPayable: AccountPayable | null = await accountsPayableRepository.findOne({
 		where: { id: accountsPayableId },
 	});
 

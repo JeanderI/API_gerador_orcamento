@@ -1,5 +1,5 @@
 import { AppDataSource } from "data-source";
-import { Location } from "entities";
+import { Location } from "../../entities";
 import AppError from "errors/AppErrors";
 
 const findLocationService = async (locationId: string) => {

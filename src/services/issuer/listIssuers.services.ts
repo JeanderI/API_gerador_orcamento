@@ -1,4 +1,4 @@
-import { Issuer } from "entities";
+import { Issuer } from "../../entities";
 import { AppDataSource } from "../../data-source";
 
 const listIssuerService = async () => {

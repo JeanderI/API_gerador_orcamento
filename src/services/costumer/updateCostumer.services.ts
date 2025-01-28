@@ -1,30 +1,30 @@
 import { AppDataSource } from "data-source";
-import { Customer } from "entities";
+import { Costumer } from "../../entities";
 import AppError from "errors/AppErrors";
 import { Repository } from "typeorm";
 
-const updateCustomerService = async (data: any, customerId: string) => {
-	const customerRepository: Repository<Customer> = AppDataSource.getRepository(Customer);
+const updateCostumerService = async (data: any, costumerId: string) => {
+	const costumerRepository: Repository<Costumer> = AppDataSource.getRepository(Costumer);
 
-	const oldCustomer: Customer | null = await customerRepository.findOne({
-		where: { id: customerId },
+	const oldCostumer: Costumer | null = await costumerRepository.findOne({
+		where: { id: costumerId },
 	});
 
-	if (!oldCustomer) {
-		throw new AppError("Customer not found", 404);
+	if (!oldCostumer) {
+		throw new AppError("Costumer not found", 404);
 	}
 
-	const customerProperties = Object.keys(oldCustomer);
+	const costumerProperties = Object.keys(oldCostumer);
 
-	customerProperties.forEach((property) => {
+	costumerProperties.forEach((property) => {
 		if (data[property] !== undefined) {
-			(oldCustomer as any)[property] = data[property];
+			(oldCostumer as any)[property] = data[property];
 		}
 	});
 
-	const updatedCustomer = await customerRepository.save(oldCustomer);
+	const updatedCostumer = await costumerRepository.save(oldCostumer);
 
-	return updatedCustomer;
+	return updatedCostumer;
 };
 
-export { updateCustomerService };
+export { updateCostumerService };

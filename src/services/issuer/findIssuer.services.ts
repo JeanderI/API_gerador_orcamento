@@ -1,5 +1,5 @@
 import { AppDataSource } from "data-source";
-import { Issuer } from "entities";
+import { Issuer } from "../../entities";
 import AppError from "errors/AppErrors";
 
 const findIssuerService = async (issuerId: string) => {

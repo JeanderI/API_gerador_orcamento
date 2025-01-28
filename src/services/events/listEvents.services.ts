@@ -1,4 +1,4 @@
-import { Event } from "entities";
+import { Event } from "../../entities";
 import { AppDataSource } from "../../data-source";
 
 const listEventService = async () => {

@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.accountsPayableRoutes = void 0;
+const accountspayable_controllers_1 = require("controllers/accountspayable.controllers");
+const express_1 = require("express");
+const accountsPayableRoutes = (0, express_1.Router)();
+exports.accountsPayableRoutes = accountsPayableRoutes;
+accountsPayableRoutes.post("", accountspayable_controllers_1.createAccountsPayableController);
+accountsPayableRoutes.get("", accountspayable_controllers_1.listAccountsPayableController);
+accountsPayableRoutes.get("/:id", accountspayable_controllers_1.findAccountsPayableController);
+accountsPayableRoutes.patch("/:id", accountspayable_controllers_1.updateAccountsPayableController);
+accountsPayableRoutes.delete("/:id", accountspayable_controllers_1.deleteAccountsPayableController);

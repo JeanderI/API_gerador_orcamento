@@ -1,17 +1,17 @@
 import { AppDataSource } from "data-source";
-import { Customer } from "entities";
+import { Costumer } from "../../entities";
 import { Repository } from "typeorm";
 
-const createCustomerService = async (data: any) => {
-	const customerRepository: Repository<Customer> = AppDataSource.getRepository(Customer);
+const createCostumerService = async (data: any) => {
+	const costumerRepository: Repository<Costumer> = AppDataSource.getRepository(Costumer);
 
-	const newCustomer = customerRepository.create({
+	const newCostumer = costumerRepository.create({
 		...data,
 	});
 
-	const createdCustomer = await customerRepository.save(newCustomer);
+	const createdCostumer = await costumerRepository.save(newCostumer);
 
-	return createdCustomer;
+	return createdCostumer;
 };
 
-export { createCustomerService };
+export { createCostumerService };

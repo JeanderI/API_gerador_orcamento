@@ -1,5 +1,5 @@
 import { AppDataSource } from "data-source";
-import { Event } from "entities";
+import { Event } from "../../entities";
 import AppError from "errors/AppErrors";
 
 const findEventService = async (eventId: string) => {

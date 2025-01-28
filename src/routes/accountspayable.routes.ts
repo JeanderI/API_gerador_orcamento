@@ -1,4 +1,10 @@
-import { createAccountsPayableController, deleteAccountsPayableController, findAccountsPayableController, listAccountsPayableController, updateAccountsPayableController } from "controllers/accountspayable.controllers"
+import { createAccountsPayableController, 
+    deleteAccountsPayableController, 
+    findAccountsPayableController, 
+    listAccountsPayableController, 
+    updateAccountsPayableController 
+} from "../controllers/accountspayable.controllers"
+
 import { Router } from "express"
 
 const accountsPayableRoutes = Router()

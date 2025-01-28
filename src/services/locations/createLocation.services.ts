@@ -1,4 +1,5 @@
 import { AppDataSource } from "data-source";
+import { Location } from "../../entities";
 import { Repository } from "typeorm";
 
 const createLocationService = async (data: any) => {

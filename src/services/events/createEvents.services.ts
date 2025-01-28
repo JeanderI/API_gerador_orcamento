@@ -1,5 +1,5 @@
 import { AppDataSource } from "data-source";
-import { Event } from "entities";
+import { Event } from "../../entities";
 import { Repository } from "typeorm";
 
 const createEventService = async (data: any) => {

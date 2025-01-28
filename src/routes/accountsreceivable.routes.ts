@@ -1,4 +1,10 @@
-import { createAccountsReceivableController, deleteAccountsReceivableController, findAccountsReceivableController, listAccountsReceivableController, updateAccountsReceivableController } from "controllers/accountsreceivable.controllers"
+import { createAccountsReceivableController, 
+    deleteAccountsReceivableController, 
+    findAccountsReceivableController, 
+    listAccountsReceivableController, 
+    updateAccountsReceivableController 
+} from "../controllers/accountsreceivable.controllers"
+
 import { Router } from "express"
 
 const accountsReceivableRoutes = Router()

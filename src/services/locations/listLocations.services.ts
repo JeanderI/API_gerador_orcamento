@@ -1,4 +1,4 @@
-import { Location } from "entities";
+import { Location } from "../../entities";
 import { AppDataSource } from "../../data-source";
 
 const listLocationService = async () => {

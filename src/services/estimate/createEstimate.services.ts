@@ -1,5 +1,5 @@
 import { AppDataSource } from "data-source";
-import { Estimate } from "entities";
+import { Estimate } from "../../entities";
 import { Repository } from "typeorm";
 
 const createEstimateService = async (data: any) => {
