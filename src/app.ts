@@ -2,8 +2,7 @@ import cors from "cors";
 import "reflect-metadata";
 import "express-async-errors";
 import express, { Application } from "express";
-import { handleErrorMiddleware } from "middlewares/handleError.middleware";
-import { accountsPayableRoutes } from "routes/accountspayable.routes";
+
 import { accountsReceivableRoutes } from "routes/accountsreceivable.routes";
 import { costumerRoutes } from "routes/costumer.routes";
 import { estimateRoutes } from "routes/estimate.routes";
@@ -11,6 +10,8 @@ import { eventRoutes } from "routes/events.routes";
 import { flavorRoutes } from "routes/flavor.routes";
 import { issuerRoutes } from "routes/issuer.routes";
 import { locationRoutes } from "routes/location.routes";
+import { handleErrorMiddleware } from "middlewares/handleError.middleware";
+import { accountsPayableRoutes } from "routes/accountspayable.routes";
 
 
 const app: Application = express();
