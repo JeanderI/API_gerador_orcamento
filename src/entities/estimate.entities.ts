@@ -1,4 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany } from "typeorm";
+import { Issuer } from "./issuer.entities";  
+import { Flavor } from "./flavor.entities";
+import { Costumer } from "./costumer.entities";
+import { Event } from "./events.entities";
+import { Location } from "./locations.entities";
 
 @Entity("estimates")
 export class Estimate {
@@ -11,18 +16,31 @@ export class Estimate {
     @Column()
     sales_type: string;
 
-    @Column()
-    costumer: string; //relacionar 
+    @ManyToOne(() => Costumer)
+    costumer: Costumer;
+
+    @OneToMany(() => Flavor, flavor => flavor.estimate)
+    flavors: Flavor[]
+
+    @ManyToOne(() => Location)
+    locations: Location;
+
+    // Relacionamento com Issuer (um Estimate pertence a um Issuer)
+    @ManyToOne(() => Issuer, issuer => issuer.estimates)
+    issuer: Issuer;
+
+    @ManyToOne(() => Event)
+    events: Event
 
     @Column()
-    flavors: string; //relacionar 
+    start_date: string;
 
     @Column()
-    locations: string; //relacionar 
+    start_time: string;
 
     @Column()
-    issuer: string; //relacionar 
+    end_date: string;
 
     @Column()
-    events: string; //relacionar 
+    end_time: string;
 }

@@ -12,20 +12,11 @@ export class Event {
     period: string;
 
     @Column()
-    start_date: string;  
-
-    @Column()
-    start_time: string;  
-
-    @Column()
-    end_date: string;  
-
-    @Column()
-    end_time: string;  
-
-    @Column()
     number_attendants: string;  
 
     @Column()
     number_clients: string;
+
+    @Column()
+    type: string
 }

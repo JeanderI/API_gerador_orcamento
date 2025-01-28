@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from "typeorm";
+import { Estimate } from "./estimate.entities";
+
 
 @Entity("costumers")
 export class Costumer {
@@ -22,4 +24,8 @@ export class Costumer {
 
     @Column()
     phone_number: string;
+
+    // Relacionamento 1:N com Estimate
+    @OneToMany(() => Estimate, estimate => estimate.costumer)
+    estimates: Estimate[];  // Um Costumer pode ter múltiplos Estimates
 }

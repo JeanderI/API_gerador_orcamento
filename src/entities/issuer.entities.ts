@@ -1,4 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from "typeorm";
+import { Estimate } from "./estimate.entities";  // Importe a entidade Estimate
+import { AccountReceivable } from "./accountsreceivable.entities";
+import { AccountPayable } from "./accountspayable.entities";
 
 @Entity("issuer")
 export class Issuer {
@@ -12,17 +15,29 @@ export class Issuer {
     name: string;
 
     @Column()
-    company_name: string; 
+    company_name: string;
 
     @Column()
-    state_registration: string; 
+    state_registration: string;
 
     @Column()
-    email: string; 
+    email: string;
 
     @Column()
-    phone_number: string; 
+    phone_number: string;
 
     @Column()
-    password: string; 
+    password: string;
+
+    // Relacionamento 1:N com Estimate
+    @OneToMany(() => Estimate, estimate => estimate.issuer)
+    estimates: Estimate[];
+
+    // Relacionamento 1:N com AccountReceivable
+    @OneToMany(() => AccountReceivable, accountReceivable => accountReceivable.issuer)
+    accountReceivables: AccountReceivable[];
+
+    // Relacionamento 1:N com AccountPayable
+    @OneToMany(() => AccountPayable, accountPayable => accountPayable.issuer)
+    accountPayables: AccountPayable[];
 }

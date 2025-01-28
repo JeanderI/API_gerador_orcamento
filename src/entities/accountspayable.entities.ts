@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
+import { Issuer } from "./issuer.entities";  // Importe a entidade Issuer
 
 @Entity("accountPayables")
 export class AccountPayable {
@@ -16,4 +17,8 @@ export class AccountPayable {
 
     @Column()
     payment_proof: string;
+
+    // Relacionamento N:1 com Issuer
+    @ManyToOne(() => Issuer, issuer => issuer.accountPayables)
+    issuer: Issuer;  // Relaciona cada AccountPayable a um Issuer
 }

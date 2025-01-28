@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
+import { Estimate } from "./estimate.entities";
 
 @Entity("locations")
 export class Location {
@@ -12,20 +13,24 @@ export class Location {
     state: string;
 
     @Column()
-    address: string; 
+    address: string;
 
     @Column()
-    number: string; 
+    number: string;
 
     @Column()
-    additional_adress: string; 
+    additional_adress: string;
 
     @Column()
-    email: string; 
+    email: string;
 
     @Column()
-    phone_number: string; 
+    phone_number: string;
 
     @Column()
-    neighborhood: string; 
+    neighborhood: string;
+
+    // Relacionamento 1:1 com Estimate
+    @ManyToOne(() => Estimate, estimate => estimate.locations)
+    estimate: Estimate;  // Relaciona cada Location a um Estimate
 }
