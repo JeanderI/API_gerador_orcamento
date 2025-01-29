@@ -1,6 +1,6 @@
 import { AppDataSource } from "data-source";
 import { AccountReceivable } from "../../entities";
-import AppError from "errors/AppErrors";
+import AppError from "../../errors/AppErrors";
 import { Repository } from "typeorm";
 
 const updateAccountsReceivableService = async (data: any, accountsReceivableId: string) => {

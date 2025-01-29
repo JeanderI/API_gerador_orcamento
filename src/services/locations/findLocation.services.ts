@@ -1,6 +1,6 @@
-import { AppDataSource } from "data-source";
+import { AppDataSource } from "../../data-source";
 import { Location } from "../../entities";
-import AppError from "errors/AppErrors";
+import AppError from "../../errors/AppErrors";
 
 const findLocationService = async (locationId: string) => {
 	const locationRepository = AppDataSource.getRepository(Location);

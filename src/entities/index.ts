@@ -1,6 +1,6 @@
 import { AccountPayable } from "./accountspayable.entities";
 import { AccountReceivable } from "./accountsreceivable.entities";
-import { Costumer } from "./costumer.entities";
+import { Client } from "./client.entities";
 import { Estimate } from "./estimate.entities";
 import { Event } from "./events.entities";
 import { Flavor } from "./flavor.entities";
@@ -11,7 +11,7 @@ import { Location } from "./locations.entities";
 export {
     AccountPayable,
     AccountReceivable,
-    Costumer,
+    Client,
     Estimate,
     Event,
     Flavor,

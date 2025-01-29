@@ -1,6 +1,6 @@
-import { AppDataSource } from "data-source";
+import { AppDataSource } from "../../data-source";
 import { Event } from "../../entities";
-import AppError from "errors/AppErrors";
+import AppError from "../../errors/AppErrors";
 import { Repository } from "typeorm";
 
 const updateEventService = async (data: any, eventId: string) => {

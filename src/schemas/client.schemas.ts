@@ -1,6 +1,6 @@
 import {z} from "zod"
 
-const costumersSchema = z.object({
+const clientsSchema = z.object({
     id: z.string(),
     cnpj: z.string(),
     name: z.string(),
@@ -10,10 +10,10 @@ const costumersSchema = z.object({
     phone_number: z.string()
 })
 
-const costumersRequest = costumersSchema.omit({id: true})
+const clientsRequest = clientsSchema.omit({id: true})
    
-const costumersResponse = z.array(costumersRequest)
+const clientsResponse = z.array(clientsRequest)
 
-export {costumersSchema, costumersRequest, costumersResponse}
+export {clientsSchema, clientsRequest, clientsResponse}
 
   

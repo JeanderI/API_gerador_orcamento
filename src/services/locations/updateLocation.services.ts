@@ -1,6 +1,6 @@
-import { AppDataSource } from "data-source";
+import { AppDataSource } from "../../data-source";
 import { Location } from "../../entities";
-import AppError from "errors/AppErrors";
+import AppError from "../../errors/AppErrors";
 import { Repository } from "typeorm";
 
 const updateLocationService = async (data: any, locationId: string) => {

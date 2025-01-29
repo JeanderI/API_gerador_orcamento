@@ -1,6 +1,6 @@
-import { AppDataSource } from "data-source";
+import { AppDataSource } from "../../data-source";
 import { Issuer } from "../../entities";
-import AppError from "errors/AppErrors";
+import AppError from "../../errors/AppErrors";
 import { Repository } from "typeorm";
 
 const updateIssuerService = async (data: any, issuerId: string) => {

@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany } from "typeorm";
 import { Issuer } from "./issuer.entities";  
 import { Flavor } from "./flavor.entities";
-import { Costumer } from "./costumer.entities";
+import { Client } from "./client.entities";
 import { Event } from "./events.entities";
 import { Location } from "./locations.entities";
 
@@ -16,8 +16,20 @@ export class Estimate {
     @Column()
     sales_type: string;
 
-    @ManyToOne(() => Costumer)
-    costumer: Costumer;
+    @Column()
+    start_date: string;
+
+    @Column()
+    start_time: string;
+
+    @Column()
+    end_date: string;
+
+    @Column()
+    end_time: string;
+
+    @ManyToOne(() => Client)
+    client: Client;
 
     @OneToMany(() => Flavor, flavor => flavor.estimate)
     flavors: Flavor[]
@@ -32,15 +44,4 @@ export class Estimate {
     @ManyToOne(() => Event)
     events: Event
 
-    @Column()
-    start_date: string;
-
-    @Column()
-    start_time: string;
-
-    @Column()
-    end_date: string;
-
-    @Column()
-    end_time: string;
 }
