@@ -15,6 +15,9 @@ export class Flavor {
     @Column()
     quantity: string;
 
+    @Column()
+    total: string;
+
     @ManyToMany(() => Estimate, (estimate) => estimate.flavors)
-    estimates: Estimate[];  // Relaciona vários Estimates com o Flavor
+    estimates: Estimate[];  
 }
