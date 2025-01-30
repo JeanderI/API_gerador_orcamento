@@ -22,6 +22,12 @@ export class Location {
     additional_adress: string;
 
     @Column()
+    transportation_costs: string;
+
+    @Column()
+    distance: string;
+
+    @Column()
     email: string;
 
     @Column()

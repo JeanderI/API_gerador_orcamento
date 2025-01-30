@@ -7,6 +7,8 @@ const locationsSchema = z.object({
     address: z.string(),
     number: z.string(),
     additional_adress: z.string(),
+    transportation_costs: z.string(),
+    distance: z.string(),
     phone_number: z.string(),
     email: z.string(),
     neighborhood: z.string(),
