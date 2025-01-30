@@ -19,7 +19,7 @@ export class Client {
     @Column()
     state_registration: string;
 
-    @Column({unique: true})
+    @Column()
     email: string;
 
     @Column()
