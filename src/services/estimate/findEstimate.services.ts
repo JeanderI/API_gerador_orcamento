@@ -7,7 +7,15 @@ const findEstimateService = async (estimateId: string) => {
 
 	const estimate = await estimateRepository.findOne({
 		where: { id: estimateId },
-	});
+		relations: [
+		  'client',        
+		  'issuer',        
+		  'locations',     
+		  'events',        
+		  'flavors',       
+		],
+	  });
+	
 
 	if (!estimate) {
 		throw new AppError("Estimate not found", 404);

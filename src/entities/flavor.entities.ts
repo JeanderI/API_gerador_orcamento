@@ -1,6 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, ManyToMany } from "typeorm";
 import { Estimate } from "./estimate.entities";
-
 
 @Entity("flavors")
 export class Flavor {
@@ -16,7 +15,7 @@ export class Flavor {
     @Column()
     quantity: string;
 
-    // Relacionamento N:1 com Estimate
-    @ManyToOne(() => Estimate, estimate => estimate.flavors)
-    estimate: Estimate;  // Relaciona cada Flavor a um Estimate
+    // Relacionamento muitos-para-muitos com Estimate
+    @ManyToMany(() => Estimate, (estimate) => estimate.flavors)
+    estimates: Estimate[];  // Relaciona vários Estimates com o Flavor
 }

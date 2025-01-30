@@ -14,7 +14,21 @@ const deleteIssuerService = async (issuerId: string) => {
 		throw new AppError("Issuer not found", 404);
 	}
 
-	await issuerRepository.remove(issuer);
+	try {
+		// Tentando remover o cliente
+		await issuerRepository.remove(issuer);
+	  } catch (error: any) { // Alterando para 'any' para acessar 'error.code' diretamente
+		// Verificando se o erro possui o código de violação de chave estrangeira
+		if (error?.driverError?.code === "23503") {
+		  // Código de erro 23503: violação de chave estrangeira no PostgreSQL
+		  throw new AppError("Issuer cannot be deleted because it is being used in estimates", 400);
+		}
+	
+		// Caso não seja a violação de chave estrangeira, lançar um erro genérico
+		throw new AppError("An error occurred while trying to delete the issuer", 500);
+	  }
+
+	
 
 	return;
 };

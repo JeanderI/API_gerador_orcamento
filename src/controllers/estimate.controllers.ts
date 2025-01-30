@@ -4,14 +4,39 @@ import { listEstimateService } from "../services/estimate/listEstimate.services"
 import { findEstimateService } from "../services/estimate/findEstimate.services";
 import { updateEstimateService } from "../services/estimate/updateEstimate.services";
 import { deleteEstimateService } from "../services/estimate/deleteEstimate.services";
+import jwt from "jsonwebtoken";
 
 const createEstimateController = async (req: Request, res: Response) => {
-	const estimateData = req.body;
-	const newEstimate = await createEstimateService(estimateData);
-
-	return res.status(201).json(newEstimate);
-};
-
+	const authToken = req.headers.authorization?.split(" ")[1];
+  
+	if (!authToken) {
+	  return res.status(401).json({ message: "Authentication token not provided" });
+	}
+  
+	const token = authToken.replace("Bearer ", "");
+	const secretKey = process.env.SECRET_KEY;
+  
+	if (secretKey === undefined) {
+	  return res.status(500).json({ message: "Secret key is not defined" });
+	}
+  
+	try {
+	  const decoded = jwt.verify(token, secretKey);
+	  const estimateId = typeof decoded.sub === "string" ? decoded.sub : "";
+  
+	  if (!estimateId) {
+		return res.status(401).json({ message: "Token is invalid" });
+	  }
+  
+	  const newEstimate = await createEstimateService(req.body, estimateId);
+  
+	  return res.status(201).json(newEstimate);
+	} catch (err) {
+	  console.error("Error verifying token:", err);
+	  return res.status(401).json({ message: "Invalid or expired token" });
+	}
+  };
+  
 const listEstimateController = async (req: Request, res: Response) => {
 	const estimates = await listEstimateService();
 

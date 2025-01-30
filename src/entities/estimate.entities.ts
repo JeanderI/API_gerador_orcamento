@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany, ManyToMany, JoinTable } from "typeorm";
 import { Issuer } from "./issuer.entities";  
 import { Flavor } from "./flavor.entities";
 import { Client } from "./client.entities";
@@ -31,17 +31,18 @@ export class Estimate {
     @ManyToOne(() => Client)
     client: Client;
 
-    @OneToMany(() => Flavor, flavor => flavor.estimate)
-    flavors: Flavor[]
+    @ManyToMany(() => Flavor, (flavor) => flavor.estimates, {
+        onDelete: "CASCADE", // Quando o Estimate for deletado, a relação com Flavor é removida, mas o Flavor não é excluído
+    })
+    @JoinTable() // Cria a tabela intermediária que relaciona `Estimate` e `Flavor`
+    flavors: Flavor[];
 
     @ManyToOne(() => Location)
     locations: Location;
 
-    // Relacionamento com Issuer (um Estimate pertence a um Issuer)
-    @ManyToOne(() => Issuer, issuer => issuer.estimates)
+    @ManyToOne(() => Issuer, (issuer) => issuer.estimates)
     issuer: Issuer;
 
     @ManyToOne(() => Event)
-    events: Event
-
+    events: Event;
 }
