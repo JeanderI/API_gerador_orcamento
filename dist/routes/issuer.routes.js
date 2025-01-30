@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.issuerRoutes = void 0;
+const issuer_controllers_1 = require("controllers/issuer.controllers");
+const express_1 = require("express");
+const issuerRoutes = (0, express_1.Router)();
+exports.issuerRoutes = issuerRoutes;
+issuerRoutes.post("", issuer_controllers_1.createIssuerController);
+issuerRoutes.get("", issuer_controllers_1.listIssuerController);
+issuerRoutes.get("/:id", issuer_controllers_1.findIssuerController);
+issuerRoutes.patch("/:id", issuer_controllers_1.updateIssuerController);
+issuerRoutes.delete("/:id", issuer_controllers_1.deleteIssuerController);

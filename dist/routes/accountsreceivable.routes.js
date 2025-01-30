@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.accountsReceivableRoutes = void 0;
+const accountsreceivable_controllers_1 = require("controllers/accountsreceivable.controllers");
+const express_1 = require("express");
+const accountsReceivableRoutes = (0, express_1.Router)();
+exports.accountsReceivableRoutes = accountsReceivableRoutes;
+accountsReceivableRoutes.post("", accountsreceivable_controllers_1.createAccountsReceivableController);
+accountsReceivableRoutes.get("", accountsreceivable_controllers_1.listAccountsReceivableController);
+accountsReceivableRoutes.get("/:id", accountsreceivable_controllers_1.findAccountsReceivableController);
+accountsReceivableRoutes.patch("/:id", accountsreceivable_controllers_1.updateAccountsReceivableController);
+accountsReceivableRoutes.delete("/:id", accountsreceivable_controllers_1.deleteAccountsReceivableController);

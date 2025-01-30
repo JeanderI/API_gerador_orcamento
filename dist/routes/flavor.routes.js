@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.flavorRoutes = void 0;
+const flavor_controllers_1 = require("controllers/flavor.controllers");
+const express_1 = require("express");
+const flavorRoutes = (0, express_1.Router)();
+exports.flavorRoutes = flavorRoutes;
+flavorRoutes.post("", flavor_controllers_1.createFlavorController);
+flavorRoutes.get("", flavor_controllers_1.listFlavorController);
+flavorRoutes.get("/:id", flavor_controllers_1.findFlavorController);
+flavorRoutes.patch("/:id", flavor_controllers_1.updateFlavorController);
+flavorRoutes.delete("/:id", flavor_controllers_1.deleteFlavorController);
