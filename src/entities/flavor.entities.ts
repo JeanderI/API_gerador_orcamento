@@ -15,7 +15,6 @@ export class Flavor {
     @Column()
     quantity: string;
 
-    // Relacionamento muitos-para-muitos com Estimate
     @ManyToMany(() => Estimate, (estimate) => estimate.flavors)
     estimates: Estimate[];  // Relaciona vários Estimates com o Flavor
 }
