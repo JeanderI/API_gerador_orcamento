@@ -8,13 +8,13 @@ export class Issuer {
     @PrimaryGeneratedColumn("uuid")
     id: string;
 
-    @Column()
+    @Column({unique: true})
     cnpj: string;
 
     @Column()
     name: string;
 
-    @Column()
+    @Column({unique: true})
     company_name: string;
 
     @Column()

@@ -7,19 +7,19 @@ export class Client {
     @PrimaryGeneratedColumn("uuid")
     id: string;
 
-    @Column()
+    @Column({unique: true})
     cnpj: string;
 
     @Column()
     name: string;
 
-    @Column()
+    @Column({unique: true})
     company_name: string;
 
     @Column()
     state_registration: string;
 
-    @Column()
+    @Column({unique: true})
     email: string;
 
     @Column()
