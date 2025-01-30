@@ -4,7 +4,8 @@ const flavorsSchema = z.object({
     id: z.string(),
     price: z.string(),
     name: z.string(),
-    quantity: z.string()
+    quantity: z.string(),
+    total: z.string()
 })
 
 const flavorsRequest = flavorsSchema.omit({id: true})
