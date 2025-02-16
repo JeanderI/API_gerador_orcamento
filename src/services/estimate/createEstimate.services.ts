@@ -1,11 +1,13 @@
 import { AppDataSource } from "../../data-source";
-import { AccountPayable, AccountReceivable, Estimate } from "../../entities";
 import { In, Repository } from "typeorm";
 import { Client } from "../../entities/client.entities";
 import { Issuer } from "../../entities/issuer.entities";
 import { Location } from "../../entities/locations.entities";
 import { Flavor } from "../../entities/flavor.entities";
 import { Event } from "../../entities/events.entities";
+import { Estimate } from "../../entities/estimate.entities";
+import { AccountReceivable } from "../../entities/accountsreceivable.entities";
+import { AccountPayable } from "../../entities/accountspayable.entities";
 
 const createEstimateService = async (data: any, issuerId: string) => {
 	const estimateRepository: Repository<Estimate> =
@@ -24,70 +26,88 @@ const createEstimateService = async (data: any, issuerId: string) => {
 	const accountPayableRepository: Repository<AccountPayable> =
 		AppDataSource.getRepository(AccountPayable);
 
-	const client = await clientRepository.findOneBy({ id: data.client });
-	const issuer = await issuerRepository.findOne({ where: { id: issuerId } });
-	const location = await locationRepository.findOne({
-		where: { id: data.locations },
-	});
-	const event = await eventRepository.findOne({ where: { id: data.events } });
-
-	if (!client || !issuer || !location || !event) {
-		throw new Error("Client, Issuer, Location or Event not found");
-	}
-
-	// Criar o orçamento (Estimate)
-	const newEstimate = estimateRepository.create({
-		total_amount: data.total_amount,
-		sales_type: data.sales_type,
-		start_date: data.start_date,
-		start_time: data.start_time,
-		end_date: data.end_date,
-		end_time: data.end_time,
-		client,
-		issuer,
-		locations: location,
-		events: event,
-	});
-
-	if (data.flavors && Array.isArray(data.flavors)) {
-		const flavors = await flavorRepository.findBy({
-			id: In(data.flavors),
+	try {
+		const client = await clientRepository.findOneBy({ id: data.client });
+		const issuer = await issuerRepository.findOne({ where: { id: issuerId } });
+		const location = await locationRepository.findOne({
+			where: { id: data.locations },
 		});
-		newEstimate.flavors = flavors;
+		const event = await eventRepository.findOne({ where: { id: data.events } });
+
+		if (!client || !issuer || !location || !event) {
+			throw new Error("Client, Issuer, Location or Event not found");
+		}
+
+		const royalties = Number(data.total_amount) * 0.06;
+
+		const bonusValue =
+			data?.bonus > 0 && data?.total_amount > 0
+				? parseFloat(data.total_amount) * (parseFloat(data.bonus) / 100)
+				: 0;
+
+		const newEstimate = new Estimate();
+		newEstimate.total_amount = data.total_amount;
+		newEstimate.sales_type = data.sales_type;
+		newEstimate.start_date = data.start_date;
+		newEstimate.start_time = data.start_time;
+		newEstimate.end_date = data.end_date;
+		newEstimate.end_time = data.end_time;
+		newEstimate.bonus = data.bonus;
+		newEstimate.client = client;
+		newEstimate.issuer = issuer;
+		newEstimate.locations = location;
+		newEstimate.events = event;
+
+		if (data.flavors && Array.isArray(data.flavors)) {
+			const flavors = await flavorRepository.findBy({
+				id: In(data.flavors),
+			});
+			newEstimate.flavors = flavors;
+		}
+
+		newEstimate.bonus_value = bonusValue;
+		newEstimate.royalties = royalties;
+
+		console.log(
+			"🚀 newEstimate antes do save:",
+			JSON.stringify(newEstimate, null, 2)
+		);
+		const createdEstimate = await estimateRepository.save(newEstimate);
+
+		const accountReceivable = accountReceivableRepository.create({
+			created_on: new Date().toISOString(),
+			installments: "1",
+			discount: "0",
+			payment_status: "pending",
+			issuer,
+			client,
+		});
+		await accountReceivableRepository.save(accountReceivable);
+
+		const accountPayable = accountPayableRepository.create({
+			expense_category: "Produto",
+			issue_date: new Date().toISOString(),
+			cost: data.total_amount,
+			payment_proof: "",
+			issuer,
+		});
+		await accountPayableRepository.save(accountPayable);
+
+		return {
+			id: createdEstimate.id,
+			total_amount: createdEstimate.total_amount,
+			sales_type: createdEstimate.sales_type,
+			start_date: createdEstimate.start_date,
+			end_date: createdEstimate.end_date,
+			royalties,
+			bonusValue,
+			accountReceivable,
+			accountPayable,
+		};
+	} catch (error) {
+		console.error("❌ Erro ao criar orçamento:", error);
+		throw new Error("Erro ao criar o orçamento");
 	}
-
-	const createdEstimate = await estimateRepository.save(newEstimate);
-
-	// Criar e salvar AccountReceivable (Contas a Receber)
-	const accountReceivable = accountReceivableRepository.create({
-		created_on: new Date().toISOString(),
-		installments: "1",
-		discount: "0",
-		payment_status: "pending",
-		issuer,
-	});
-
-	console.log("AccountReceivable antes do save:", accountReceivable);
-	await accountReceivableRepository.save(accountReceivable);
-
-	// Criar e salvar AccountPayable (Contas a Pagar)
-	const accountPayable = accountPayableRepository.create({
-		expense_category: "Produto",
-		issue_date: new Date().toISOString(),
-		cost: data.total_amount,
-		payment_proof: "",
-		issuer,
-	});
-
-	console.log("AccountPayable antes do save:", accountPayable);
-	await accountPayableRepository.save(accountPayable);
-
-	// Retornar o orçamento criado junto com as contas a pagar e receber
-	return {
-		...createdEstimate,
-		accountReceivable,
-		accountPayable,
-	};
 };
 
 export { createEstimateService };

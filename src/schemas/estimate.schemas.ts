@@ -1,24 +1,25 @@
-import {z} from "zod"
+import { z } from "zod";
 
 const estimatesSchema = z.object({
-    id: z.string(),
-    total_amount: z.string(),
-    sales_type: z.string(),
-    costumer: z.string(),
-    flavors: z.string(),
-    email: z.string(),
-    locations: z.string(),
-    events: z.string(),
-    start_date: z.string(),
-    start_time: z.string(),
-    end_date: z.string(),
-    end_time: z.string(),
-})
+	id: z.string(),
+	total_amount: z.string(),
+	sales_type: z.string(),
+	costumer: z.string(),
+	flavors: z.string(),
+	email: z.string(),
+	locations: z.string(),
+	events: z.string(),
+	start_date: z.string(),
+	start_time: z.string(),
+	end_date: z.string(),
+	end_time: z.string(),
+	royalites: z.string(),
+	bonus: z.string(),
+	bonus_value: z.string(),
+});
 
-const estimatesRequest = estimatesSchema.omit({id: true})
-   
-const estimatesResponse = z.array(estimatesRequest)
+const estimatesRequest = estimatesSchema.omit({ id: true });
 
-export {estimatesSchema, estimatesRequest, estimatesResponse}
+const estimatesResponse = z.array(estimatesRequest);
 
-  
+export { estimatesSchema, estimatesRequest, estimatesResponse };

@@ -3,40 +3,43 @@ import { Estimate } from "./estimate.entities";
 
 @Entity("locations")
 export class Location {
-    @PrimaryGeneratedColumn("uuid")
-    id: string;
+	@PrimaryGeneratedColumn("uuid")
+	id: string;
 
-    @Column()
-    city: string;
+	@Column()
+	city: string;
 
-    @Column()
-    state: string;
+	@Column()
+	state: string;
 
-    @Column()
-    address: string;
+	@Column()
+	address: string;
 
-    @Column()
-    number: string;
+	@Column()
+	number: string;
 
-    @Column()
-    additional_adress: string;
+	@Column()
+	additional_adress: string;
 
-    @Column()
-    transportation_costs: string;
+	@Column()
+	transportation_costs: string;
 
-    @Column()
-    distance: string;
+	@Column()
+	distance: string;
 
-    @Column()
-    email: string;
+	@Column()
+	email: string;
 
-    @Column()
-    phone_number: string;
+	@Column()
+	phone_number: string;
 
-    @Column()
-    neighborhood: string;
+	@Column()
+	neighborhood: string;
 
-    // Relacionamento 1:1 com Estimate
-    @ManyToOne(() => Estimate, estimate => estimate.locations)
-    estimate: Estimate;  // Relaciona cada Location a um Estimate
+	@Column()
+	total: string;
+
+	// Relacionamento 1:1 com Estimate
+	@ManyToOne(() => Estimate, (estimate) => estimate.locations)
+	estimate: Estimate; // Relaciona cada Location a um Estimate
 }
