@@ -21,12 +21,11 @@ const createEventService = async (data: any) => {
 	}
 
 	if (data.type === Type.PIAGGIO) {
-		total += 400;
+		total += parseFloat(data.piaggio_cost);
 	} else if (data.type === Type.SHOWCASE) {
-		total += 200;
+		total += parseFloat(data.showcase_cost);
 	}
 
-	total += 50;
 
 	const attendantsCost =
 		Number(data.number_attendants) *
