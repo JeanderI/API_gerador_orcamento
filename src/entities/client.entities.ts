@@ -7,8 +7,29 @@ export class Client {
 	@PrimaryGeneratedColumn("uuid")
 	id: string;
 
-	@Column({ unique: true })
+	@Column()
+	city: string;
+
+	@Column()
+	state: string;
+
+	@Column()
+	address: string;
+
+	@Column()
+	number: string;
+
+	@Column()
+	cep: string;
+
+	@Column({ unique: true, nullable: true })
 	cnpj: string;
+
+	@Column({ unique: true })
+	cpf: string;
+
+	@Column({ unique: true })
+	rg: string;
 
 	@Column()
 	name: string;

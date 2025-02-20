@@ -19,6 +19,9 @@ export class Location {
 	number: string;
 
 	@Column()
+	cep: string;
+
+	@Column()
 	additional_adress: string;
 
 	@Column()

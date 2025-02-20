@@ -1,40 +1,58 @@
 import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from "typeorm";
-import { Estimate } from "./estimate.entities";  
+import { Estimate } from "./estimate.entities";
 import { AccountReceivable } from "./accountsreceivable.entities";
 import { AccountPayable } from "./accountspayable.entities";
 
 @Entity("issuer")
 export class Issuer {
-    @PrimaryGeneratedColumn("uuid")
-    id: string;
+	@PrimaryGeneratedColumn("uuid")
+	id: string;
 
-    @Column({unique: true})
-    cnpj: string;
+	@Column()
+	city: string;
 
-    @Column()
-    name: string;
+	@Column()
+	state: string;
 
-    @Column()
-    company_name: string;
+	@Column()
+	address: string;
 
-    @Column()
-    state_registration: string;
+	@Column()
+	number: string;
 
-    @Column()
-    email: string;
+	@Column()
+	cep: string;
 
-    @Column()
-    phone_number: string;
+	@Column({ unique: true })
+	cnpj: string;
 
-    @Column()
-    password: string;
+	@Column()
+	name: string;
 
-    @OneToMany(() => Estimate, estimate => estimate.issuer)
-    estimates: Estimate[];
+	@Column()
+	company_name: string;
 
-    @OneToMany(() => AccountReceivable, accountReceivable => accountReceivable.issuer)
-    accountReceivables: AccountReceivable[];
+	@Column()
+	state_registration: string;
 
-    @OneToMany(() => AccountPayable, accountPayable => accountPayable.issuer)
-    accountPayables: AccountPayable[];
+	@Column()
+	email: string;
+
+	@Column()
+	phone_number: string;
+
+	@Column()
+	password: string;
+
+	@OneToMany(() => Estimate, (estimate) => estimate.issuer)
+	estimates: Estimate[];
+
+	@OneToMany(
+		() => AccountReceivable,
+		(accountReceivable) => accountReceivable.issuer
+	)
+	accountReceivables: AccountReceivable[];
+
+	@OneToMany(() => AccountPayable, (accountPayable) => accountPayable.issuer)
+	accountPayables: AccountPayable[];
 }

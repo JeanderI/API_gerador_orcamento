@@ -52,4 +52,16 @@ export class Event {
 
 	@Column()
 	total: string;
+
+	@Column()
+	start_date: string;
+
+	@Column()
+	start_time: string;
+
+	@Column()
+	end_date: string;
+
+	@Column()
+	end_time: string;
 }

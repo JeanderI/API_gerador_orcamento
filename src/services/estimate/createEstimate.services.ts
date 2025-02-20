@@ -38,15 +38,29 @@ const createEstimateService = async (data: any, issuerId: string) => {
 			throw new Error("Client, Issuer, Location or Event not found");
 		}
 
-		const royalties = Number(data.total_amount) * 0.06;
+		const locationTotal = parseFloat(location.total) || 0;
+		const eventTotal = parseFloat(event.total) || 0;
+
+		let flavorsTotal = 0;
+		if (data.flavors && Array.isArray(data.flavors)) {
+			const flavors = await flavorRepository.findBy({ id: In(data.flavors) });
+			flavorsTotal = flavors.reduce(
+				(sum, flavor) => sum + (parseFloat(flavor.total) || 0),
+				0
+			);
+		}
+
+		const totalAmount = locationTotal + eventTotal + flavorsTotal;
+
+		const royalties = totalAmount * 0.06;
 
 		const bonusValue =
-			data?.bonus > 0 && data?.total_amount > 0
-				? parseFloat(data.total_amount) * (parseFloat(data.bonus) / 100)
+			data?.bonus > 0 && totalAmount > 0
+				? totalAmount * (parseFloat(data.bonus) / 100)
 				: 0;
 
 		const newEstimate = new Estimate();
-		newEstimate.total_amount = data.total_amount;
+		newEstimate.total_amount = totalAmount.toFixed(2);
 		newEstimate.sales_type = data.sales_type;
 		newEstimate.start_date = data.start_date;
 		newEstimate.start_time = data.start_time;
@@ -59,19 +73,14 @@ const createEstimateService = async (data: any, issuerId: string) => {
 		newEstimate.events = event;
 
 		if (data.flavors && Array.isArray(data.flavors)) {
-			const flavors = await flavorRepository.findBy({
+			newEstimate.flavors = await flavorRepository.findBy({
 				id: In(data.flavors),
 			});
-			newEstimate.flavors = flavors;
 		}
 
 		newEstimate.bonus_value = bonusValue;
-		newEstimate.royalties = royalties;
+		newEstimate.royalties = royalties.toFixed(2);
 
-		console.log(
-			"🚀 newEstimate antes do save:",
-			JSON.stringify(newEstimate, null, 2)
-		);
 		const createdEstimate = await estimateRepository.save(newEstimate);
 
 		const accountReceivable = accountReceivableRepository.create({
@@ -87,7 +96,7 @@ const createEstimateService = async (data: any, issuerId: string) => {
 		const accountPayable = accountPayableRepository.create({
 			expense_category: "Produto",
 			issue_date: new Date().toISOString(),
-			cost: data.total_amount,
+			cost: totalAmount.toFixed(2),
 			payment_proof: "",
 			issuer,
 		});

@@ -13,6 +13,7 @@ const locationsSchema = z.object({
 	email: z.string(),
 	neighborhood: z.string(),
 	total: z.string(),
+	cep: z.string(),
 });
 
 const locationsRequest = locationsSchema.omit({ id: true });

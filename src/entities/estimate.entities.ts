@@ -37,7 +37,7 @@ export class Estimate {
 	end_time: string;
 
 	@Column()
-	royalties: number;
+	royalties: string;
 
 	@Column()
 	bonus: string;
